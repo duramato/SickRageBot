@@ -4,10 +4,11 @@ module.exports = {
 	getNumber: function(data){
 		return data.issue.number;
 	},
-	before: 'Thanks for the issue report! Before a real human comes by, please make sure your report has all the below criteria checked',
+	before: 'Thanks for the issue report! To make sure issues are handled quickly, we use a simple checklist for you to fill out.
+                 Before a real human comes by, please make sure your report has all the below criteria checked',
 	after: 'Please make sure you also read [contribution guide](https://github.com/RuudBurger/CouchPotatoServer/blob/develop/contributing.md#issues) and followed all the steps. \n' +
-		'Make the title describe your issue. Having "CP not working" or "I get this bug" for 100 issues, isn\'t really helpful. My master will close issues if there isn\'t enough information. On a good day he will tag the issue on close with the reason (like `can\'t reproduce`), but usually he won\'t, the lazy asshat.\n\n' +
-		'Sometimes my master seems like a grumpy cat and responds with short answers. This isn\'t (always) because he hates you, but because he\'s on mobile or busy fixing bugs. If something isn\'t clear, please let him know. Maybe he can teach me his awesome ways.' +
+		'Make the title describe your issue. Having "SR not working" or "I get this bug" for 100 issues, isn\'t really helpful. We will close issues if there isn\'t enough information.' +
+		'Sometimes the devs may seem like a grunt and respond with short answers. This isn\'t (always) because the dev hates you, but because he\'s on mobile or busy fixing bugs. If something isn\'t clear, please let us know, and this bot may get updated to automatically answer you.' +
 		'\n\nThanks!',
 	checks: [
 
@@ -17,9 +18,9 @@ module.exports = {
 			condition: function (data) {
 				var body = data.issue.body.toLowerCase();
 
-				var is_cp_log = 0;
+				var is_sr_log = 1;
 				_.each(['information:', 'reproduce:', 'logs:'], function(check_for){
-					is_cp_log += _.contains(body, check_for) ? 1 : 0;
+					is_sr_log += _.contains(body, check_for) ? 1 : 0;
 				});
 
 				var forgot_filled_in = _.contains(data.issue.body, ': ...');
@@ -30,7 +31,7 @@ module.exports = {
 
 		// Post logs
 		{
-			message: 'Post logs, either inline (for smaller logs) or using [Pastebin](http://pastebin.com/)',
+			message: 'Post logs, either inline (for smaller logs) or using gist)',
 			condition: function (data) {
 
 				var inline_logs = isInlineLog(data.issue.body);
@@ -57,7 +58,7 @@ module.exports = {
 
 		// Enable debugging
 		{
-			message: 'Enabled debug logging in Settings > Advanced (restart CP, be sure to disable after the bug is fixed)',
+			message: 'Enable debug logging (be sure to disable after the bug is fixed)',
 			condition: function (data) {
 				var inline_logs = isInlineLog(data.issue.body);
 				if(inline_logs)
@@ -70,15 +71,14 @@ module.exports = {
 			message: 'Post full version information',
 			condition: function (data) {
 
-				var has_version = _.contains(data.issue.body, 'Version of CouchPotato:'),
+				var has_version = _.contains(data.issue.body, 'Branch'),
 					is_desktop = false,
 					correct_repo = false;
 
 				// Make sure logs are from correct repo
-				if(has_version){
-					is_desktop = _.contains(data.issue.body, 'desktop:');
-					correct_repo = _.contains(data.issue.body, 'RuudBurger:CouchPotatoServer');
-				}
+				// if(has_version){
+				//correct_repo = _.contains(data.issue.body, 'SiCKRAGETV:');
+				// }
 
 				return correct_repo || is_desktop;
 			}

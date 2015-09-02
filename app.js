@@ -24,7 +24,7 @@ global.github = new GitHubApi({
 	// optional
 	timeout: 5000,
 	headers: {
-		"user-agent": 'CouchPotatoBot'
+		"user-agent": 'SickRageBot'
 	}
 });
 github.authenticate({
