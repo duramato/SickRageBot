@@ -6,8 +6,8 @@ module.exports = {
 	},
 	before: 'Thanks for the issue report! To make sure issues are handled quickly, it helps if all info is there. Before a real human comes by, please make sure your report has all the below criteria checked',
 	after: 'Please make sure you also read [how to create an issue](https://github.com/SiCKRAGETV/sickrage-issues/blob/master/README.md) and followed all the steps. \n\n' +
-		'Make the title describe your issue. Having "SR not working" or "I get this bug" for 100 issues, isn\'t really helpful. We will close issues if there isn\'t enough information.\n\n' +
-		'Sometimes the devs may seem like grunts and respond with short answers. This isn\'t (always) because the dev hates you, but because he\'s on mobile or busy fixing bugs. If something isn\'t clear, please let us know, and this bot may get updated to automatically answer you.' +
+		'Make the title describe your issue. Having "SR not working" or "I am getting this bug" for 100 issues, isn\'t really helpful. We will close issues if there isn\'t enough information.\n\n' +
+		'Sometimes the devs may seem like grunts and respond with short answers. This isn\'t (always) because the devs don\'t like you, but because they are on mobile or busy other fixing bugs. If something isn\'t clear, please let us know, and this bot may get updated to automatically answer you.' +
 		'\n\nThanks!',
 	checks: [
 
